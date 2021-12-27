@@ -10,7 +10,7 @@ namespace CronExpressionParser.Tests
         public async Task GenerateExpectedOutputForTheGivenArgument()
         {
             //Arrange
-            var input = "*/ 15 0 1,15 * 1 - 5 / usr / bin / find";
+            var input = "*/15 0 1,15 * 1-5 /usr/bin/find";
             var expectedOutput = "minute\t0 15 30 45\n" +
                                  "hour\t0\n" +
                                  "day\tof month 1 15\n" +
