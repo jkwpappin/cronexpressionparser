@@ -7,9 +7,7 @@ namespace CronExpressionParser.Tests
     {
         [TestCase("0", ExpectedResult = "hour\t0")]
         [TestCase("15", ExpectedResult = "hour\t15")]
-        [TestCase("32", ExpectedResult = "hour\t32")]
-        [TestCase("45", ExpectedResult = "hour\t45")]
-        [TestCase("59", ExpectedResult = "hour\t59")]
+        [TestCase("22", ExpectedResult = "hour\t22")]
         public string GivenSimpleNumericInput_ReturnExpectedDisplayValue(string input)
         {
             var hour = new Hour(input);

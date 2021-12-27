@@ -9,7 +9,9 @@ public class CronService
         var cronArguments = cronExpression.Split(" ");
         var minute = new Minute(cronArguments[0]);
         var hour = new Hour(cronArguments[1]);
+        var dayOfMonth = new DayOfMonth(cronArguments[2]);
         return await Task.FromResult(minute.GetDisplayText()
-        + hour.GetDisplayText());
+        + hour.GetDisplayText()
+        + dayOfMonth.GetDisplayText());
     }
 }
