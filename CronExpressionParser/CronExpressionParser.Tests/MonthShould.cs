@@ -7,7 +7,7 @@ namespace CronExpressionParser.Tests
         [TestCase("1", ExpectedResult = "month\t1")]
         [TestCase("5", ExpectedResult = "month\t5")]
         [TestCase("12", ExpectedResult = "month\t12")]
-        public string GivenSimpleNumericInput_ReturnExpectedDisplayValue(string input)
+        public string GivenSimpleNumericInput_ReturnUnalteredDisplayValue(string input)
         {
             var hour = new Month(input);
 

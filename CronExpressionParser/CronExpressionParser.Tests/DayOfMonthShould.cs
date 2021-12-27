@@ -8,7 +8,7 @@ namespace CronExpressionParser.Tests
         [TestCase("1", ExpectedResult = "day of month\t1")]
         [TestCase("3", ExpectedResult = "day of month\t3")]
         [TestCase("28", ExpectedResult = "day of month\t28")]
-        public string GivenSimpleNumericInput_ReturnExpectedDisplayValue(string input)
+        public string GivenSimpleNumericInput_ReturnUnalteredDisplayValue(string input)
         {
             var dayOfMonth = new DayOfMonth(input);
 

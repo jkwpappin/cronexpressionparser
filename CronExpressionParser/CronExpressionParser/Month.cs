@@ -8,12 +8,12 @@ namespace CronExpressionParser
 {
     public class Month : CronNumericalArgument
     {
+        protected override string DisplayName => "month";
+        protected override int MaximumValue => 13;
+        protected override bool StartsAtZero => false;
         public Month(string argument) : base(argument)
         {
         }
 
-        protected override string DisplayName => "month";
-        protected override int MaximumValue => 13;
-        protected override bool StartsAtZero => false;
     }
 }

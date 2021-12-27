@@ -5,6 +5,8 @@ using DayOfWeek = CronExpressionParser.DayOfWeek;
 
 public class CronService
 {
+    private const string NewLine = "\n";
+
     public async Task<string> Run(string cronExpression)
     {
         var cronArguments = cronExpression.Split(" ");
@@ -14,11 +16,13 @@ public class CronService
         var month = new Month(cronArguments[3]);
         var dayOfWeek = new DayOfWeek(cronArguments[4]);
         var cronCommand = new CronCommand(cronArguments[5]);
-        return await Task.FromResult(minute.GetDisplayText() + "\n"
-        + hour.GetDisplayText() + "\n"
-        + dayOfMonth.GetDisplayText() + "\n"
-        + month.GetDisplayText() + "\n"
-        + dayOfWeek.GetDisplayText() + "\n"
+
+
+        return await Task.FromResult(minute.GetDisplayText() + NewLine
+        + hour.GetDisplayText() + NewLine
+        + dayOfMonth.GetDisplayText() + NewLine
+        + month.GetDisplayText() + NewLine
+        + dayOfWeek.GetDisplayText() + NewLine
         + cronCommand.GetDisplayText());
     }
 }

@@ -10,7 +10,7 @@ namespace CronExpressionParser.Tests
         [TestCase("32", ExpectedResult = "minute\t32")]
         [TestCase("45", ExpectedResult = "minute\t45")]
         [TestCase("59", ExpectedResult = "minute\t59")]
-        public string GivenSimpleNumericInput_ReturnExpectedDisplayValue(string input)
+        public string GivenSimpleNumericInput_ReturnUnalteredDisplayValue(string input)
         {
             var minute = new Minute(input);
 

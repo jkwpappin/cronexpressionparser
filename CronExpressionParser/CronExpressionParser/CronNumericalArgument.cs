@@ -2,6 +2,11 @@
 
 public abstract class CronNumericalArgument : IDisplayCronArgument
 {
+    private const string RecurringWildcardSpecialCharacter = "*";
+    private const string RangeSpecialCharacter = "-";
+    private const string ValueSeparatorSpecialCharacter = ",";
+    private const string IncrementorSpecialCharacter = "/";
+    private const string DisplayValueSeparator = " ";
     protected abstract string DisplayName { get; }
     protected string DisplayValue;
     protected abstract int MaximumValue { get; }
@@ -14,17 +19,17 @@ public abstract class CronNumericalArgument : IDisplayCronArgument
 
     private string ParseArgument(string argument)
     {
-        if (argument.StartsWith("*"))
+        if (argument.StartsWith(RecurringWildcardSpecialCharacter))
         {
             return HandleRecurringIntervals(argument);
         }
 
-        if (argument.Contains("-"))
+        if (argument.Contains(RangeSpecialCharacter))
         {
             return HandleRanges(argument);
         }
 
-        if (argument.Contains(","))
+        if (argument.Contains(ValueSeparatorSpecialCharacter))
         {
             return HandleMultipleValues(argument);
         }
@@ -34,17 +39,17 @@ public abstract class CronNumericalArgument : IDisplayCronArgument
 
     private string HandleMultipleValues(string argument)
     {
-        var values = argument.Split(",");
-        return string.Join(" ", values);
+        var values = argument.Split(ValueSeparatorSpecialCharacter);
+        return string.Join(DisplayValueSeparator, values);
     }
 
     private string HandleRanges(string argument)
     {
-        var range = argument.Split("-");
+        var range = argument.Split(RangeSpecialCharacter);
         int startOfRange = int.Parse(range[0]);
         int endOfRange = int.Parse(range[1]);
         var values = Enumerable.Range(startOfRange, endOfRange - startOfRange + 1);
-        return string.Join(" ", values);
+        return string.Join(DisplayValueSeparator, values);
     }
 
     private string HandleRecurringIntervals(string argument)
@@ -52,14 +57,14 @@ public abstract class CronNumericalArgument : IDisplayCronArgument
         string parseArgument;
         parseArgument = argument.Substring(1);
         var incrementValue = 1;
-        if (parseArgument.StartsWith("/"))
+        if (parseArgument.StartsWith(IncrementorSpecialCharacter))
         {
             incrementValue = int.Parse(parseArgument.Substring(1));
         }
         var maxRange = CalculateMaxRange(incrementValue);
         var values = Enumerable.Range(StartsAtZero ? 0 : 1, maxRange);
 
-        return string.Join(" ", values.Select(index => index * incrementValue));
+        return string.Join(DisplayValueSeparator, values.Select(index => index * incrementValue));
     }
 
     private int CalculateMaxRange(int incrementValue)
@@ -72,6 +77,7 @@ public abstract class CronNumericalArgument : IDisplayCronArgument
 
     public string GetDisplayText()
     {
-        return $"{DisplayName}\t{DisplayValue}";
+        const string tabSeperator = "\t";
+        return $"{DisplayName}{tabSeperator}{DisplayValue}";
     }
 }

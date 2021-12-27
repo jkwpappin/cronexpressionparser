@@ -8,12 +8,11 @@ namespace CronExpressionParser
 {
     public class DayOfMonth : CronNumericalArgument
     {
-        public DayOfMonth(string argument) : base(argument)
-        {
-        }
-
         protected override string DisplayName => "day of month";
         protected override int MaximumValue => 32;
         protected override bool StartsAtZero => false;
+        public DayOfMonth(string argument) : base(argument)
+        {
+        }
     }
 }
