@@ -16,7 +16,7 @@ namespace CronExpressionParser.Tests
         [TestCase("explorer.exe")]
         public void GivenAnyArgument_ReturnUnalteredDisplayValue(string argument)
         {
-            var expectedValue = "command\t" + argument;
+            var expectedValue = "command       " + argument;
 
             var command = new CronCommand(argument);
 

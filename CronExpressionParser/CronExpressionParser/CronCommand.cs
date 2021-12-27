@@ -11,7 +11,7 @@
 
         public string GetDisplayText()
         {
-            return $"command\t{Command}";
+            return $"command       {Command}";
         }
     }
 }

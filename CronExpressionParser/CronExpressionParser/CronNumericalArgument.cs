@@ -7,6 +7,7 @@ public abstract class CronNumericalArgument : IDisplayCronArgument
     private const string ValueSeparatorSpecialCharacter = ",";
     private const string IncrementorSpecialCharacter = "/";
     private const string DisplayValueSeparator = " ";
+    private const int DisplayNameFixedLength = 14;
     protected abstract string DisplayName { get; }
     protected string DisplayValue;
     protected abstract int MaximumValue { get; }
@@ -77,7 +78,11 @@ public abstract class CronNumericalArgument : IDisplayCronArgument
 
     public string GetDisplayText()
     {
-        const string tabSeperator = "\t";
-        return $"{DisplayName}{tabSeperator}{DisplayValue}";
+        string spacingSeperator = string.Empty;
+        for (int index = DisplayName.Length ; index < DisplayNameFixedLength; index++)
+        {
+            spacingSeperator += DisplayValueSeparator;
+        }
+        return $"{DisplayName}{spacingSeperator}{DisplayValue}";
     }
 }
