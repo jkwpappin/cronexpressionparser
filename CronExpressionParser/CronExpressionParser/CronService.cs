@@ -5,6 +5,6 @@ public class CronService
     {
         var cronArguments = cronExpression.Split(" ");
         var minute = new Minute(cronArguments[0]);
-        return await Task.FromResult(string.Empty);
+        return await Task.FromResult(minute.DisplayName);
     }
 }
