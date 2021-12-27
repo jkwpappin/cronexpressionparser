@@ -8,5 +8,6 @@ namespace CronExpressionParser
 {
     internal interface IDisplayCronArgument
     {
+        string GetDisplayText();
     }
 }

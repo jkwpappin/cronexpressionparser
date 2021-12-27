@@ -37,7 +37,7 @@ namespace CronExpressionParser.Tests
         }
 
         [TestCase("1,5", ExpectedResult = "day of month\t1 5")]
-        [TestCase("0,2,17", ExpectedResult = "day of month\t0 2 17")]
+        [TestCase("1,2,17", ExpectedResult = "day of month\t1 2 17")]
         [TestCase("19,22,24,25", ExpectedResult = "day of month\t19 22 24 25")]
         public string GivenMultipleValuesInput_ReturnExpectedMultipleValues(string input)
         {
