@@ -1,8 +1,11 @@
-﻿public abstract class CronNumericalArgument
+﻿using CronExpressionParser;
+
+public abstract class CronNumericalArgument : IDisplayCronArgument
 {
     protected abstract string DisplayName { get; }
     protected string DisplayValue;
     protected abstract int MaximumValue { get; }
+    protected abstract bool StartsAtZero { get; }
 
     public CronNumericalArgument(string argument)
     {
@@ -40,7 +43,6 @@
         var range = argument.Split("-");
         int startOfRange = int.Parse(range[0]);
         int endOfRange = int.Parse(range[1]);
-        var resultString = string.Empty;
         var values = Enumerable.Range(startOfRange, endOfRange - startOfRange + 1);
         return string.Join(" ", values);
     }
@@ -54,11 +56,18 @@
         {
             incrementValue = int.Parse(parseArgument.Substring(1));
         }
-        var maxRange = (MaximumValue / incrementValue);
-        maxRange = (maxRange * incrementValue >= MaximumValue) ? maxRange : maxRange + 1;
-        var values = Enumerable.Range(0, maxRange);
+        var maxRange = CalculateMaxRange(incrementValue);
+        var values = Enumerable.Range(StartsAtZero ? 0 : 1, maxRange);
 
         return string.Join(" ", values.Select(index => index * incrementValue));
+    }
+
+    private int CalculateMaxRange(int incrementValue)
+    {
+        var maxRange = (MaximumValue / incrementValue);
+        maxRange = (maxRange * incrementValue >= MaximumValue) ? maxRange : maxRange + 1;
+        maxRange = StartsAtZero ? maxRange : maxRange - 1;
+        return maxRange;
     }
 
     public string GetDisplayText()

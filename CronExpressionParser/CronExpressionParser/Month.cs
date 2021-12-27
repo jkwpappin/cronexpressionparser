@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace CronExpressionParser
 {
-    public class DayOfMonth : CronNumericalArgument
+    public class Month : CronNumericalArgument
     {
-        public DayOfMonth(string argument) : base(argument)
+        public Month(string argument) : base(argument)
         {
         }
 
-        protected override string DisplayName => "day of month";
-        protected override int MaximumValue => 32;
+        protected override string DisplayName => "month";
+        protected override int MaximumValue => 13;
         protected override bool StartsAtZero => false;
     }
 }
